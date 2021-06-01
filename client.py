@@ -2,8 +2,39 @@ import socket                   # Import socket module
 from pynput import keyboard
 import tkinter as tk
 
-host = input('Where to connect to (IP can be found through hostname -i on linux, ipconfig -a on windows): ')     # Where to connect to
+host = ""
+def saveip():
+    while True:
+        saveyn = input('Do you want to save your ip for next time? yes/no ')
+        if saveyn == "yes":
+            h = open('ipname', 'w')
+            h.write(host)
+            h.close()
+            break
+        elif saveyn == "no":
+            break
+
+try:
+    with open('ipname', 'r') as f:
+        ipfilec = ""
+        ipfilec = f.read()
+        if ipfilec == "":
+            print('ipname file is empty')
+            print('Where to connect to (IP can be found through "ip addr" on linux, "ipconfig -a" on windows): ')
+            print('If you do not want to type this on next startup, create a file called "ipname" containing the target IP')
+            host = input('IP: ')
+            saveip()
+        else:
+            host = ipfilec
+except:
+    print('ipname file not found')
+    print('Where to connect to (IP can be found through "ip addr" on linux, "ipconfig -a" on windows): ')
+    print('If you do not want to type this on next startup, create a file called "ipname" containing the target IP')
+    host = input('IP: ')
+    saveip()
 port = 60000
+
+print('Connect to: ' + host)
 
 def getClipboardText():
     root = tk.Tk()
