@@ -2,8 +2,6 @@ import socket                   # Import socket module
 from pynput import keyboard
 import tkinter as tk
 
-
-
 host = input('Where to connect to (IP can be found through hostname -i on linux, ipconfig -a on windows): ')     # Where to connect to
 port = 60000
 
@@ -15,25 +13,6 @@ def getClipboardText():
         return root.clipboard_get().encode("UTF-8", "ignore")
     except:
         return "ERR: clipboard is not text".encode()
-
-def listen():
-    s = socket.socket()             # Create a socket object
-    s.connect((host, port))
-    
-    s.send("GET".encode())
-    data = s.recv(1024)
-    print('Receiving file')
-    with open('received_file', 'wb') as f:
-        print('file opened')
-        while (data):
-            print('receiving data...')
-            # print('data=%s', (data))
-            f.write(data)
-            data = s.recv(1024)
-    f.close()
-    print('Successfully get the file')
-    s.close()
-    print('connection closed')
 
 def send():
     s = socket.socket()             # Create a socket object
