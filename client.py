@@ -20,7 +20,7 @@ try:
         ipfilec = f.read()
         if ipfilec == "":
             print('ipname file is empty')
-            print('Where to connect to (IP can be found through "ip addr" on linux, "ipconfig -a" on windows): ')
+            print('Where to connect to (IP can be found through "ip addr" on linux, "ipconfig" on windows): ')
             print('If you do not want to type this on next startup, create a file called "ipname" containing the target IP')
             host = input('IP: ')
             saveip()
